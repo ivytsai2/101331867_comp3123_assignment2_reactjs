@@ -55,23 +55,25 @@ export default class Login extends Component {
 
     render() {
         return (
-            <Form style={form_style}>
-                <h1 style={center}>Login Account</h1>
-                <Form.Group className="mb-3">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" placeholder="Enter username" name="username"
-                    onChange={(e) => this.onValueChange(e)}/>
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" name="password"
-                    onChange={(e) => this.onValueChange(e)}/>
-                </Form.Group>
-                <div style={center}>
-                    <Button className="btn btn-success" type="submit"
-                    onClick={(e) => this.onSubmitLogin(e)}>Submit</Button>
-                </div>
-            </Form>
+            <>
+                <Form style={form_style}>
+                    <h1 style={center}>Login Account</h1>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control type="text" placeholder="Enter username" name="username"
+                        onChange={(e) => this.onValueChange(e)}/>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" placeholder="Password" name="password"
+                        onChange={(e) => this.onValueChange(e)}/>
+                    </Form.Group>
+                    <div style={center}>
+                        <Button className="btn btn-success" type="submit"
+                        onClick={(e) => this.onSubmitLogin(e)}>Submit</Button>
+                    </div>
+                </Form>
+            </>
         )
     }
 }
