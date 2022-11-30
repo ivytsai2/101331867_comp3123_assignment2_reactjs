@@ -3,6 +3,7 @@ import axiosAPI from './api'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { NavLink } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
 
 
 const form_style = {
@@ -74,7 +75,7 @@ export default class Login extends Component {
                         onClick={(e) => this.onSubmitLogin(e)}>Submit</Button>
                     </div>
                 </Form>
-                <NavLink to ='/signup'>Signup</NavLink>
+                <Container>Don't have an account? <NavLink to='/signup'>Sign up</NavLink> here</Container>
             </>
         )
     }

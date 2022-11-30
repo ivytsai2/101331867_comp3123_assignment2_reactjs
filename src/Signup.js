@@ -3,6 +3,7 @@ import axiosAPI from './api'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { NavLink } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
 
 const form_style = {
     padding: '1%',
@@ -81,7 +82,7 @@ export default class Signup extends Component {
                     onClick={(e) => this.onSubmitLogin(e)}>Submit</Button>
                 </div>
             </Form>
-            <NavLink to ='/login'>Login</NavLink>
+            <Container>Alreaady have an account? <NavLink to='/login'>Login</NavLink> here</Container>
         </>
         )
   }
