@@ -13,11 +13,7 @@ function App() {
       <BrowserRouter>
         <Navbar bg="light" expand="lg">
           <Container>
-            <Navbar.Brand href="/">Comp3123 - Assignment 101331867</Navbar.Brand>
-            <Nav className="me-auto">
-              <NavLink to ='/login'>Login</NavLink>
-              <NavLink to ='/signup'>Signup</NavLink>
-            </Nav>
+            <Navbar.Brand href="/">Employee Manangement App</Navbar.Brand>
           </Container>
         </Navbar>
           <Routes>
