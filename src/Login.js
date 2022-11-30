@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { NavLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
+import UserNavbar from './UserNavbar';
 
 
 const form_style = {
@@ -23,7 +24,7 @@ export default class Login extends Component {
         super(props)
         this.state = {
             username: '',
-            password: ''
+            password: '',
         }
     }
 
@@ -41,38 +42,43 @@ export default class Login extends Component {
             username: this.state.username,
             password: this.state.password
         }
-        axiosAPI.post('/user/login', {userData}, {
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "POST",
-                'Access-Control-Request-Headers': '*'
-            }
-        })
+        axiosAPI.post('/user/login', userData)
         .then(res => {
-            console.log(res)
+            console.log(res.data)
         }).catch(error => {
-            console.log(error)
+            console.log(error.response.data)
         })
     }
 
     render() {
         return (
             <>
-                <Form style={form_style}>
+                <UserNavbar/>
+                <br></br>
+                <Form style={form_style} onSubmit={(e) => this.onSubmitLogin(e)}>
                     <h1 style={center}>Login Account</h1>
                     <Form.Group className="mb-3">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control type="text" placeholder="Enter username" name="username"
+                        <Form.Control 
+                        type="text" 
+                        placeholder="Enter username" 
+                        name="username" 
+                        required
                         onChange={(e) => this.onValueChange(e)}/>
+                        <Form.Control.Feedback type="invalid">Please enter a username.</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" name="password"
+                        <Form.Control 
+                        type="password" 
+                        placeholder="Enter password" 
+                        name="password" 
+                        required
                         onChange={(e) => this.onValueChange(e)}/>
+                        <Form.Control.Feedback type="invalid">Please enter a password.</Form.Control.Feedback>
                     </Form.Group>
                     <div style={center}>
-                        <Button className="btn btn-success" type="submit"
-                        onClick={(e) => this.onSubmitLogin(e)}>Submit</Button>
+                        <Button className="btn btn-success" type="submit">Submit</Button>
                     </div>
                 </Form>
                 <Container>Don't have an account? <NavLink to='/signup'>Sign up</NavLink> here</Container>
