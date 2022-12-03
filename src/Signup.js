@@ -47,8 +47,10 @@ export default class Signup extends Component {
         axiosAPI.post('/user/signup', userData)
         .then(res => {
             console.log(res.data)
+            alert(res.data.message)
         }).catch(error => {
             console.log(error.response.data)
+            alert("Sign Up Failed! " + error.response.data.message)
         })
     }
 

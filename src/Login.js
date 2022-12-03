@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { NavLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import UserNavbar from './UserNavbar';
-
+import { Navigate } from 'react-router-dom';
 
 const form_style = {
     padding: '1%',
@@ -25,6 +25,7 @@ export default class Login extends Component {
         this.state = {
             username: '',
             password: '',
+            loginSuccess: false
         }
     }
 
@@ -44,9 +45,12 @@ export default class Login extends Component {
         }
         axiosAPI.post('/user/login', userData)
         .then(res => {
+            this.setState({loginSuccess: true})
             console.log(res.data)
         }).catch(error => {
+            this.setState({loginSuccess: false})
             console.log(error.response.data)
+            alert("Login Failed! " + error.response.data.message)
         })
     }
 
@@ -55,7 +59,7 @@ export default class Login extends Component {
             <>
                 <UserNavbar/>
                 <br></br>
-                <Form style={form_style} onSubmit={(e) => this.onSubmitLogin(e)}>
+                    <Form style={form_style} onSubmit={(e) => this.onSubmitLogin(e)}>
                     <h1 style={center}>Login Account</h1>
                     <Form.Group className="mb-3">
                         <Form.Label>Username</Form.Label>
@@ -82,6 +86,7 @@ export default class Login extends Component {
                     </div>
                 </Form>
                 <Container>Don't have an account? <NavLink to='/signup'>Sign up</NavLink> here</Container>
+                {this.state.loginSuccess && <Navigate to='/employees' replace={true}></Navigate>}
             </>
         )
     }
