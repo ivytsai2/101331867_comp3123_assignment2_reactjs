@@ -50,7 +50,7 @@ export default class Signup extends Component {
             alert(res.data.message)
         }).catch(error => {
             console.log(error.response.data)
-            alert("Sign Up Failed! " + error.response.data.message)
+            alert("Sign Up Failed... " + error.response.data.message)
         })
     }
 
@@ -82,7 +82,7 @@ export default class Signup extends Component {
                     <Form.Label>Password</Form.Label>
                     <Form.Control 
                     type="password" 
-                    placeholder="Password" 
+                    placeholder="Enter password" 
                     name="password"
                     required
                     onChange={(e) => this.onValueChange(e)}/>

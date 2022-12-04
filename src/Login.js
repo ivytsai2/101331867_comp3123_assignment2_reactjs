@@ -25,7 +25,8 @@ export default class Login extends Component {
         this.state = {
             username: '',
             password: '',
-            loginSuccess: false
+            loginSuccess: false,
+            token: ''
         }
     }
 
@@ -45,7 +46,7 @@ export default class Login extends Component {
         }
         axiosAPI.post('/user/login', userData)
         .then(res => {
-            this.setState({loginSuccess: true})
+            this.setState({loginSuccess: true, token: res.data.token})
             console.log(res.data)
         }).catch(error => {
             this.setState({loginSuccess: false})
@@ -86,7 +87,7 @@ export default class Login extends Component {
                     </div>
                 </Form>
                 <Container>Don't have an account? <NavLink to='/signup'>Sign up</NavLink> here</Container>
-                {this.state.loginSuccess && <Navigate to='/employees' replace={true}></Navigate>}
+                {this.state.loginSuccess && <Navigate to='/employees' replace={true} state={{token: this.state.token}}/>}
             </>
         )
     }
