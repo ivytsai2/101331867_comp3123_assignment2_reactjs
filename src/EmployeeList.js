@@ -64,9 +64,9 @@ export default class EmployeeList extends Component {
                   <th>{emp.email}</th>
                   <th>{emp.gender}</th>
                   <th>
-                    <Button className="btn btn-success">Update</Button>
+                    <NavLink className="btn btn-success" to={`/employees/update/${emp._id}`}>Update</NavLink>
                     <Button className="btn btn-danger">Delete</Button>
-                    <NavLink className="btn btn-info" to={`/employees/${emp._id}`}>View</NavLink>
+                    <NavLink className="btn btn-info" to={`/employees/view/${emp._id}`}>View</NavLink>
                   </th>
                 </tr>
               ))

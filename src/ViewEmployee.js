@@ -36,13 +36,13 @@ export default function ViewEmployee() {
             });
         };
         getEmployee();
-      }, [navigate, empId.id]);
+    }, [navigate, empId.id]);
 
     return (
         <>
         <EmployeeNavbar/>
         <br></br>
-        <h2>Employee Details</h2>
+        <h2>View Employee Details</h2>
         <Container>
             <Card>
                 <Card.Body>
