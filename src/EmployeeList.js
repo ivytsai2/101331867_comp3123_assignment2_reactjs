@@ -17,8 +17,7 @@ export default class EmployeeList extends Component {
         email: "",
         gender: "",
         salary: ""
-      },
-      view: true
+      }
     }
   }
 
@@ -65,7 +64,16 @@ export default class EmployeeList extends Component {
                   <th>{emp.gender}</th>
                   <th>
                     <NavLink className="btn btn-success" to={`/employees/update/${emp._id}`}>Update</NavLink>
-                    <Button className="btn btn-danger">Delete</Button>
+                    <Button className="btn btn-danger" onClick={() => {
+                      axiosAPI.delete(`/emp/employees?eid=${emp._id}`)
+                          .then(res => {
+                            console.log("Delete successful")
+                            window.location.reload();
+                        }).catch(error => {
+                            console.log(error.response.data)
+                            alert("Delete Employee Failed... " + error.response.data.message)
+                        })
+                    }}>Delete</Button>
                     <NavLink className="btn btn-info" to={`/employees/view/${emp._id}`}>View</NavLink>
                   </th>
                 </tr>
