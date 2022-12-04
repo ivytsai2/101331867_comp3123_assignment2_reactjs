@@ -100,6 +100,7 @@ export default function UpdateEmployee() {
                     placeholder="Enter email" 
                     name="email"
                     defaultValue={employee.email}
+                    required
                     onChange={(e) => onValueChange(e)}/>
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -121,6 +122,7 @@ export default function UpdateEmployee() {
                     placeholder="Enter salary" 
                     name="salary"
                     defaultValue={employee.salary}
+                    required
                     onChange={(e) => onValueChange(e)}/>
                 </Form.Group>
                 <div className="center">
