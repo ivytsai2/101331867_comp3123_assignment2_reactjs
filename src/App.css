@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+.link_style {
+  padding: 1%;
+  margin: auto;
+  width: 600px
+}
+
+.center {
+  padding-bottom: 20px; 
+  text-align: center
+}
+
+.form_style {
+  padding: 1%;
+  border: solid green;
+  margin: auto;
+  width: 600px;
+}
+
+.right {
+  display: inline; 
+  text-align: right;
+  font-family: Georgia, serif
+}
+
+.left {
+  display: inline;
+  text-align: left;
+  font-family: serif
+}

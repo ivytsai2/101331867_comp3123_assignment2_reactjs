@@ -5,18 +5,6 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import EmployeeNavbar from './EmployeeNavbar'
 
-const form_style = {
-    padding: '1%',
-    border: 'solid green', 
-    margin: 'auto',
-    width: '600px'
-}
-
-const center = {
-paddingBottom: '20px', 
-textAlign: 'center'
-}
-
 export default function UpdateEmployee() {
     const empData = {
         id: "",
@@ -83,8 +71,8 @@ export default function UpdateEmployee() {
         
             <EmployeeNavbar/>
             <br></br>
-            <Form style={form_style} onSubmit={(e) => {updateEmployee(e)}}>
-                <h1 style={center}>Update Employee</h1>
+            <Form className='form_style' onSubmit={(e) => {updateEmployee(e)}}>
+                <h1 className='center'>Update Employee</h1>
                 <Form.Group className="mb-3">
                     <Form.Label>First Name</Form.Label>
                     <Form.Control 
@@ -135,7 +123,7 @@ export default function UpdateEmployee() {
                     defaultValue={employee.salary}
                     onChange={(e) => onValueChange(e)}/>
                 </Form.Group>
-                <div style={center}>
+                <div className="center">
                     <Button className="btn btn-success" type="submit" style={{marginRight: 50}}>Save</Button>
                     <NavLink className="btn btn-danger" to='/employees'>Cancel</NavLink>
                 </div>

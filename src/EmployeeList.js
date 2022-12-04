@@ -7,11 +7,6 @@ import Button from 'react-bootstrap/Button';
 import { NavLink, Navigate } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
 
-const center = {
-  paddingBottom: '20px', 
-  textAlign: 'center'
-}
-
 export default class EmployeeList extends Component {
   constructor(props) {
     super(props)
@@ -56,7 +51,7 @@ export default class EmployeeList extends Component {
       <>
         <EmployeeNavbar/>
         <br></br>
-        <h2 style={center}>Employee List</h2>
+        <h2 className="center">Employee List</h2>
         <Container>
           <NavLink style={{marginBottom: 20}} className="btn btn-primary" 
           to='/employees/add'>Add Employee</NavLink>
@@ -126,7 +121,6 @@ export default class EmployeeList extends Component {
             </tbody>
           </Table>
         </Container>
-
         {this.state.withoutToken && <Navigate to='/' replace={true}/>}
       </>
     )

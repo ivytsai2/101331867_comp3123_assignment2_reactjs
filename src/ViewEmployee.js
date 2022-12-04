@@ -6,29 +6,6 @@ import {Row, Col, Card} from "react-bootstrap"
 import Button from "react-bootstrap/Button"
 import EmployeeNavbar from './EmployeeNavbar'
 
-const center = {
-    paddingBottom: '20px', 
-    textAlign: 'center'
-}
-
-const form_style = {
-    padding: '1%',
-    margin: 'auto',
-    width: 600
-}
-
-const right = {
-    display:"inline", 
-    textAlign: 'right',
-    fontFamily: "Georgia, serif"
-}
-
-const left = {
-    display:"inline", 
-    textAlign: 'left',
-    fontFamily: "serif"
-}
-
 export default function ViewEmployee() {
     const empData = {
         id: "",
@@ -67,45 +44,45 @@ export default function ViewEmployee() {
         <>
             <EmployeeNavbar/>
             <br></br>
-            <h2 style={center}>View Employee Details</h2>
-            <Container style={form_style}>
-                <Card style={{width: 600}}>
+            <h2 className='center'>View Employee Details</h2>
+            <Container>
+                <Card>
                     <Card.Body>
-                        <Row style={center}>
-                            <Col style={right}><h3>First Name:</h3></Col>
-                            <Col style={left}><h3>{
+                        <Row className='center'>
+                            <Col className='right'><h3>First Name:</h3></Col>
+                            <Col className='left'><h3>{
                                 typeof(employee.first_name[0]) === 'string' ?
                                 (employee.first_name[0]).toUpperCase() + ((employee.first_name).substring(1)).toLowerCase()
                                 : employee.first_name
                             }</h3></Col>
                         </Row>
-                        <Row style={center}>
-                            <Col style={right}><h3>Last Name:</h3></Col>
-                            <Col style={left}><h3>{
+                        <Row className='center'>
+                            <Col className='right'><h3>Last Name:</h3></Col>
+                            <Col className='left'><h3>{
                                 typeof(employee.last_name[0]) === 'string' ?
                                 (employee.last_name[0]).toUpperCase() + ((employee.last_name).substring(1)).toLowerCase()
                                 : employee.last_name
                             }</h3></Col>
                         </Row>
-                        <Row style={center}>
-                            <Col style={right}><h3>Email:</h3></Col>
-                            <Col style={left}><h3>{employee.email}</h3></Col>
+                        <Row className='center'>
+                            <Col className='right'><h3>Email:</h3></Col>
+                            <Col className='left'><h3>{employee.email}</h3></Col>
                         </Row>
-                        <Row style={center}>
-                            <Col style={right}><h3>Gender:</h3></Col>
-                            <Col style={left}><h3>{
+                        <Row className='center'>
+                            <Col className='right'><h3>Gender:</h3></Col>
+                            <Col className='left'><h3>{
                                 typeof(employee.gender[0]) === 'string' ?
                                 (employee.gender[0]).toUpperCase() + (employee.gender).substring(1)
                                 : employee.gender
                             }</h3></Col>
                         </Row>
-                        <Row style={center}>
-                            <Col style={right}><h3>Salary:</h3></Col>
-                            <Col style={left}><h3>${parseFloat(employee.salary).toFixed(2)}</h3></Col>
+                        <Row className='center'>
+                            <Col className='right'><h3>Salary:</h3></Col>
+                            <Col className='left'><h3>${parseFloat(employee.salary).toFixed(2)}</h3></Col>
                         </Row>
                     </Card.Body>
                 </Card>
-                <div style={center}>
+                <div className='center'>
                     <Button style={{marginTop: 50}} onClick={() => {navigate("/employees");}}>
                         Back to Employee List
                     </Button>

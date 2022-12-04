@@ -5,18 +5,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { NavLink, Navigate } from 'react-router-dom';
 
-const form_style = {
-  padding: '1%',
-  border: 'solid green', 
-  margin: 'auto',
-  width: '600px'
-}
-
-const center = {
-  paddingBottom: '20px', 
-  textAlign: 'center'
-}
-
 export default class AddEmployee extends Component {
   constructor(props) {
     super(props)
@@ -26,7 +14,8 @@ export default class AddEmployee extends Component {
       email: null,
       gender: "other",
       salary: "",
-      addSuccess: false
+      addSuccess: false,
+      withoutToken: false
     }
   }
 
@@ -63,13 +52,19 @@ export default class AddEmployee extends Component {
     })
   }
 
+  componentDidMount = () => {
+    if (localStorage.getItem('token') === null) {
+      this.setState({withoutToken: true})
+    }
+  }
+
   render() {
     return (
       <>
         <EmployeeNavbar/>
         <br></br>
-        <Form style={form_style} onSubmit={(e) => this.addEmployee(e)}>
-          <h1 style={center}>Add Employee</h1>
+        <Form className="form_style" onSubmit={(e) => this.addEmployee(e)}>
+          <h1 className="center">Add Employee</h1>
           <Form.Group className="mb-3">
               <Form.Label>First Name</Form.Label>
               <Form.Control 
@@ -133,12 +128,13 @@ export default class AddEmployee extends Component {
               required
               onChange={(e) => this.onValueChange(e)}/>
           </Form.Group>
-          <div style={center}>
+          <div className="center">
               <Button className="btn btn-success" type="submit" style={{marginRight: 50}}>Submit</Button>
               <NavLink className="btn btn-danger" to='/employees'>Cancel</NavLink>
           </div>
         </Form>
         {this.state.addSuccess && <Navigate to='/employees' replace={true}/>}
+        {this.state.withoutToken && <Navigate to='/' replace={true}/>}
       </>
     )
   }
