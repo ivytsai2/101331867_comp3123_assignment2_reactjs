@@ -3,19 +3,19 @@
 #### Hsin Yu Ivy Tsai - 101331867
 
 Login Page
-![Login](login.png)
+![Login](login.PNG)
 
 Sign up Page
-![SignUp](signup.png)
+![SignUp](signup.PNG)
 
 Employee List Page
-![Employees](empList.png)
+![Employees](empList.PNG)
 
 Add Employee Page
-![AddEmployee](addEmp.png)
+![AddEmployee](addEmp.PNG)
 
 Edit Employee Page
-![EditEmployee](updateEmp.png)
+![EditEmployee](updateEmp.PNG)
 
 View Employee Page
-![ViewEmployee](viewEmp.png)
+![ViewEmployee](viewEmp.PNG)
