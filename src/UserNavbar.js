@@ -6,7 +6,7 @@ export default class UserNavbar extends Component {
   render() {
     return (
       <>
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
                 <Navbar.Brand href="/">Employee Manangement App</Navbar.Brand>
             </Container>

@@ -13,6 +13,12 @@ const form_style = {
     width: '600px'
 }
 
+const link_style ={
+    padding: '1%',
+    margin: 'auto',
+    width: '600px'
+}
+
 const center = {
     paddingBottom: '20px', 
     textAlign: 'center'
@@ -46,11 +52,9 @@ export default class Signup extends Component {
         }
         axiosAPI.post('/user/signup', userData)
         .then(res => {
-            console.log(res.data)
             alert(res.data.message)
         }).catch(error => {
-            console.log(error.response.data)
-            alert("Sign Up Failed... " + error.response.data.message)
+            alert("Sign Up Failed! " + error.response.data.message)
         })
     }
 
@@ -91,7 +95,9 @@ export default class Signup extends Component {
                     <Button className="btn btn-success" type="submit">Submit</Button>
                 </div>
             </Form>
-            <Container>Alreaady have an account? <NavLink to='/login'>Login</NavLink> here</Container>
+            <Container style={link_style}>
+                Alreaady have an account? <NavLink to='/login'>Login</NavLink> here
+            </Container>
         </>
         )
   }

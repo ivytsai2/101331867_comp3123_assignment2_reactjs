@@ -14,6 +14,12 @@ const form_style = {
     width: '600px'
 }
 
+const link_style ={
+    padding: '1%',
+    margin: 'auto',
+    width: '600px'
+}
+
 const center = {
     paddingBottom: '20px', 
     textAlign: 'center'
@@ -47,12 +53,15 @@ export default class Login extends Component {
         axiosAPI.post('/user/login', userData)
         .then(res => {
             this.setState({loginSuccess: true, token: res.data.token})
-            console.log(res.data)
+            localStorage.setItem('token', res.data.token)
         }).catch(error => {
             this.setState({loginSuccess: false})
-            console.log(error.response.data)
             alert("Login Failed! " + error.response.data.message)
         })
+    }
+
+    componentDidMount = () => {
+        localStorage.clear()
     }
 
     render() {
@@ -70,7 +79,6 @@ export default class Login extends Component {
                         name="username" 
                         required
                         onChange={(e) => this.onValueChange(e)}/>
-                        <Form.Control.Feedback type="invalid">Please enter a username.</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Password</Form.Label>
@@ -80,14 +88,17 @@ export default class Login extends Component {
                         name="password" 
                         required
                         onChange={(e) => this.onValueChange(e)}/>
-                        <Form.Control.Feedback type="invalid">Please enter a password.</Form.Control.Feedback>
                     </Form.Group>
                     <div style={center}>
                         <Button className="btn btn-success" type="submit">Submit</Button>
                     </div>
                 </Form>
-                <Container>Don't have an account? <NavLink to='/signup'>Sign up</NavLink> here</Container>
-                {this.state.loginSuccess && <Navigate to='/employees' replace={true} state={{token: this.state.token}}/>}
+                <Container style={link_style}>
+                    Don't have an account?<NavLink to='/signup'>Sign up</NavLink> here
+                </Container>
+
+                {this.state.loginSuccess && 
+                <Navigate to='/employees' replace={true}/>}
             </>
         )
     }

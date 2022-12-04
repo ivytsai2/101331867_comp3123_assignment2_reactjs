@@ -26,39 +26,34 @@ export default function UpdateEmployee() {
         gender: "",
         salary: ""
     }
+    const gender = ['female', 'male', 'other']
     const empId = useParams()
     const navigate = useNavigate()
     const [employee, setEmployee] = useState(empData)
 
     useEffect(() => {
         const getEmployee = () => {
-            axiosAPI.get(`emp/employees/${empId.id}`)
+            axiosAPI.get(`emp/employees/${empId.id}`, {
+                headers: {
+                  'x-access-token': localStorage.getItem('token')
+                }
+            })
             .then((res) => {
-                console.log(res.data)
                 if (res.data.length === 0) {
                     navigate("/employees");
                 } else {
                     setEmployee(res.data);
                 }
             }).catch(error => {
-                console.log(error.response.data)
                 alert("" + error.response.data.message)
+                navigate("/employees")
             });
         };
         getEmployee();
     }, [navigate, empId.id]);
 
-    const onValueChange = async (event) => {
-        const value = event.target.value;
-        setEmployee({...employee, [event.target.name]: value});
-    }
-
-    const onValueChangeNumeric = async (event) => {
-        const value = event.target.value;
-        setEmployee({...employee, [event.target.name]: value});
-        if (isNaN(employee.salary) || employee.salary < 0){
-            setEmployee({salary: ""})
-        }
+    const onValueChange = (event) => {
+        setEmployee({...employee, [event.target.name]: event.target.value});
     }
 
     const updateEmployee = (event) => {
@@ -70,17 +65,22 @@ export default function UpdateEmployee() {
             gender: event.target.gender.value,
             salary: event.target.salary.value
         }
-        axiosAPI.put(`/emp/employees/${empId.id}`, updateEmpData)
+        axiosAPI.put(`/emp/employees/${empId.id}`, updateEmpData, {
+            headers: {
+              'x-access-token': localStorage.getItem('token')
+            }
+        })
             .then(res => {
             navigate("/employees")
         }).catch(error => {
             console.log(error.response.data)
-            alert("Add Employee Failed... " + error.response.data.message)
+            alert("Update Employee Failed... " + error.response.data.message)
         })
     }
 
     return (
         <>
+        
             <EmployeeNavbar/>
             <br></br>
             <Form style={form_style} onSubmit={(e) => {updateEmployee(e)}}>
@@ -116,28 +116,14 @@ export default function UpdateEmployee() {
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label>Gender</Form.Label>
-                    <div onChange={(e) => onValueChange(e)} defaultValue={employee.gender}>
-                        <Form.Check
-                        inline
-                        label="Female"
-                        value="Female"
-                        name="gender"
-                        type="radio"
-                        />
-                        <Form.Check
-                        inline
-                        label="Male"
-                        value="Male"
-                        name="gender"
-                        type="radio"
-                        />
-                        <Form.Check
-                        inline
-                        label="Other"
-                        value="Other"
-                        name="gender"
-                        type="radio"
-                        />
+                    <div>
+                        {gender.map(g => (
+                            <div className="form-check form-check-inline" key={g}>
+                                <input className="form-check-input" type='radio' value={g} name='gender' 
+                                checked={employee.gender === g} onChange={(e) => onValueChange(e)}/>
+                                <label className="form-check-label">{(g[0]).toUpperCase() + (g).substring(1)}</label>
+                            </div>
+                        ))}
                     </div>
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -147,10 +133,10 @@ export default function UpdateEmployee() {
                     placeholder="Enter salary" 
                     name="salary"
                     defaultValue={employee.salary}
-                    onChange={(e) => onValueChangeNumeric(e)}/>
+                    onChange={(e) => onValueChange(e)}/>
                 </Form.Group>
                 <div style={center}>
-                    <Button className="btn btn-success" type="submit">Save</Button>
+                    <Button className="btn btn-success" type="submit" style={{marginRight: 50}}>Save</Button>
                     <NavLink className="btn btn-danger" to='/employees'>Cancel</NavLink>
                 </div>
             </Form>

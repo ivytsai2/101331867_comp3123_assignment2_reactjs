@@ -23,7 +23,7 @@ export default class AddEmployee extends Component {
     this.state = {
       fname: "",
       lname: "",
-      email: "",
+      email: null,
       gender: "other",
       salary: "",
       addSuccess: false
@@ -32,13 +32,6 @@ export default class AddEmployee extends Component {
 
   onValueChange = (event) => {
     this.setState({[event.target.name] : event.target.value})
-  }
-
-  onValueChangeNumeric = (event) => {
-    this.setState({[event.target.name] : event.target.value})
-    if (isNaN(this.state.salary) || this.state.salary < 0){
-      this.setState({salary: ""})
-    }
   }
 
   /*{
@@ -57,13 +50,15 @@ export default class AddEmployee extends Component {
       gender: this.state.gender,
       salary: this.state.salary
     }
-    axiosAPI.post('/emp/employees', empData)
+    axiosAPI.post('/emp/employees', empData, {
+      headers: {
+        'x-access-token': localStorage.getItem('token')
+      }
+    })
     .then(res => {
       this.setState({addSuccess: true})
-      console.log(res.data)
     }).catch(error => {
       this.setState({addSuccess: false})
-      console.log(error.response.data)
       alert("Add Employee Failed... " + error.response.data.message)
     })
   }
@@ -99,6 +94,7 @@ export default class AddEmployee extends Component {
               type="emial" 
               placeholder="Enter email" 
               name="email"
+              required
               onChange={(e) => this.onValueChange(e)}/>
           </Form.Group>
           <Form.Group className="mb-3">
@@ -134,10 +130,11 @@ export default class AddEmployee extends Component {
               type="text" 
               placeholder="Enter salary" 
               name="salary"
-              onChange={(e) => this.onValueChangeNumeric(e)}/>
+              required
+              onChange={(e) => this.onValueChange(e)}/>
           </Form.Group>
           <div style={center}>
-              <Button className="btn btn-success" type="submit">Submit</Button>
+              <Button className="btn btn-success" type="submit" style={{marginRight: 50}}>Submit</Button>
               <NavLink className="btn btn-danger" to='/employees'>Cancel</NavLink>
           </div>
         </Form>
@@ -146,5 +143,3 @@ export default class AddEmployee extends Component {
     )
   }
 }
-
-
