@@ -4,9 +4,10 @@ import EmployeeNavbar from './EmployeeNavbar'
 import Container from 'react-bootstrap/Container'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import { NavLink, Navigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import withRouter from './withRouter';
 
-export default class EmployeeList extends Component {
+class EmployeeList extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -22,7 +23,11 @@ export default class EmployeeList extends Component {
   }
 
   getEmployeeList = async() => {
-    axiosAPI.get('/emp/employees')
+    axiosAPI.get('/emp/employees', {
+      headers: {
+        'x-access-token': this.props.location.state
+      }
+    })
     .then(res => {
       console.log(res.data)
       this.setState({employeeList: res.data})
@@ -87,4 +92,4 @@ export default class EmployeeList extends Component {
   }
 }
 
-
+export default withRouter(EmployeeList)
